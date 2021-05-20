@@ -11,21 +11,20 @@ const fahrToCelsius = (input) => {
 
 // Validates input type then calls the appropriate function
 const convertFahrToCelsius = (input) => {
-	let convertInputToNumber = '';
-	Array.isArray(input) ? convertInputToNumber = Number(input) : convertInputToNumber = parseInt(input)
-	return isNaN(convertInputToNumber) ? checkInputType(input) : fahrToCelsius(input)
+	let convertInputToNumber;
+	(Array.isArray(input) && input.length > 0) ? convertInputToNumber = Number(input) : convertInputToNumber = parseInt(input)
+	return isNaN(convertInputToNumber) ? errorHandler(input) : fahrToCelsius(input)
 }
 
 //Checks invalid parameter type and outputs a message accordingly
-const checkInputType = (input) => {
+const errorHandler = (input) => {
 		let errorMessage = ''; 
-		if(Array.isArray(input)) {
-			errorMessage = `${JSON.stringify(input)} is not a valid number but an array`
-			console.log(errorMessage);
-		} else {
+		(Array.isArray(input)) ?
+			errorMessage = `${JSON.stringify(input)} is not a valid number but an array` 
+			:
 			errorMessage = `${JSON.stringify(input)} is not a valid number but a/an ${typeof(input)}`
-			console.log(errorMessage);
-		}
+
+		console.log(errorMessage);
 
 	return errorMessage;
 }
@@ -68,7 +67,7 @@ const createArray = (n) => {
 // Validate input and calls the appropriate function
 const checkYuGiOh = (n) => {
 	let inputToNumber = '';
-	Array.isArray(n) ? inputToNumber = Number(n) : inputToNumber = parseInt(n);
+	(Array.isArray(n) && n.length > 0) ? inputToNumber = Number(n) : inputToNumber = parseInt(n);
 	return isNaN(inputToNumber) ? errorHandlerFunc(n) : createArray(n);
 }
 
